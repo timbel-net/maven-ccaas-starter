@@ -35,6 +35,8 @@
   </licenses>
 
   <properties>
+    <start-with-langsa.version>0.7</start-with-langsa.version>
+
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -106,9 +108,10 @@
       <plugin>
         <groupId>ai.langsa</groupId>
         <artifactId>start-with-langsa-plugin</artifactId>
-        <version>0.6</version>
+        <version>${start-with-langsa.version}</version>
         <executions>
           <execution>
+            <phase>validate</phase>
             <goals>
               <goal>initialize</goal>
             </goals>
@@ -137,6 +140,11 @@
             <artifactId>checkstyle</artifactId>
             <version>10.17.0</version>
           </dependency>
+          <dependency>
+            <groupId>ai.langsa</groupId>
+            <artifactId>start-with-langsa-plugin</artifactId>
+            <version>${start-with-langsa.version}</version>
+          </dependency>
         </dependencies>
         <configuration>
           <logViolationsToConsole>true</logViolationsToConsole>
@@ -145,7 +153,7 @@
           <failsOnError>true</failsOnError>
           <violationSeverity>info</violationSeverity>
           <configLocation>
-            https://github.com/timbel-net/maven-ccaas-starter/raw/main/checkstyle.xml
+            checkstyle.xml
           </configLocation>
         </configuration>
         <executions>
