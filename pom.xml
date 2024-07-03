@@ -8,18 +8,17 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>3.3.0</version>
-    <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
   <groupId>ai.langsa</groupId>
-  <artifactId>pom-ccaas-langsa</artifactId>
+  <artifactId>ccaas-starter</artifactId>
   <version>0.1</version>
-  <url>https://github.com/timbel-net/maven-pom-ccaas-langsa</url>
+  <url>https://github.com/timbel-net/maven-ccaas-starter</url>
   <description>A maven plugin is helps starting your project.</description>
   <packaging>pom</packaging>
   <scm>
     <url>
-      https://github.com/timbel-net/maven-pom-ccaas-langsa:0.6ai.langsa:pom-ccaas-langsa:0.6.git
+      https://github.com/timbel-net/maven-ccaas-starter:0.6ai.langsa:ccaas-starter:0.6.git
     </url>
   </scm>
 
@@ -39,6 +38,9 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <sonar.host.url>https://static-analysis.langsa.ai</sonar.host.url>
+    <sonar.projectKey>${project.artifactId}</sonar.projectKey>
   </properties>
 
   <dependencies>
@@ -48,49 +50,59 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-cache</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.kafka</groupId>
+      <artifactId>spring-kafka</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        <version>2.6.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.gavlyukovskiy</groupId>
+        <artifactId>p6spy-spring-boot-starter</artifactId>
+        <version>1.9.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <version>3.2.4</version>
-        <executions>
-          <execution>
-            <id>sign-artifacts</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>sign</goal>
-            </goals>
-            <configuration>
-              <keyname>95B9EA88</keyname>
-              <gpgArguments>
-                <arg>--batch</arg>
-                <arg>--pinentry-mode</arg>
-                <arg>loopback</arg>
-                <arg>--passphrase</arg>
-                <arg>timbel-net</arg>
-              </gpgArguments>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.sonatype.central</groupId>
-        <artifactId>central-publishing-maven-plugin</artifactId>
-        <version>0.5.0</version>
-        <extensions>true</extensions>
-        <configuration>
-          <publishingServerId>central</publishingServerId>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>ai.langsa</groupId>
         <artifactId>start-with-langsa-plugin</artifactId>
@@ -132,7 +144,9 @@
           <consoleOutput>true</consoleOutput>
           <failsOnError>true</failsOnError>
           <violationSeverity>info</violationSeverity>
-          <configLocation>checkstyle.xml</configLocation>
+          <configLocation>
+            https://github.com/timbel-net/maven-ccaas-starter/raw/main/checkstyle.xml
+          </configLocation>
         </configuration>
         <executions>
           <execution>
