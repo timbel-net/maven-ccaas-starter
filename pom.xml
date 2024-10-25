@@ -12,7 +12,7 @@
 
   <groupId>ai.langsa</groupId>
   <artifactId>ccaas-starter</artifactId>
-  <version>cloud-0.1</version>
+  <version>cloud-0.2</version>
   <url>https://github.com/timbel-net/maven-ccaas-starter</url>
   <description>A maven plugin is helps starting your project.</description>
   <packaging>pom</packaging>
@@ -160,16 +160,12 @@
       <artifactId>micrometer-registry-prometheus</artifactId>
     </dependency>
     <dependency>
-      <artifactId>spring-cloud-starter-config</artifactId>
       <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-config-client</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-config-client</artifactId>
     </dependency>
   </dependencies>
 
